@@ -1,0 +1,15 @@
+export default `<!doctype html>
+<html lang="es" data-beasties-container="">
+  <head>
+    <meta charset="utf-8">
+    <title>donde-estaciono</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0ea5e9">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="styles-5INURTSO.css"></head>
+  <body ngcm="">
+    <app-root></app-root>
+  <link rel="modulepreload" href="chunk-A34W4UDL.js"><link rel="modulepreload" href="chunk-Y6QKN6CD.js"><script src="main-XIMJRXH6.js" type="module"></script></body>
+</html>
+`;
