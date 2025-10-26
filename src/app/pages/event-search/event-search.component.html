@@ -1,2 +1,53 @@
-<h1>Buscar estacionamiento</h1>
-<p>Acá va el buscador de eventos…</p>
+<form class="search-form" [formGroup]="form" (ngSubmit)="submit()">
+  <h2 class="title">Buscar estacionamiento para tu evento</h2>
+
+  <div class="field">
+    <label for="query">Evento o artista *</label>
+    <input
+      id="query"
+      type="text"
+      placeholder="Ej: Coldplay, Feria del Libro…"
+      formControlName="query"
+    />
+    <small class="error" *ngIf="submitted && queryCtrl.hasError('required')">
+      Este campo es obligatorio.
+    </small>
+  </div>
+
+  <div class="field">
+    <label for="city">Ciudad o venue</label>
+    <input id="city" type="text" placeholder="Ej: Buenos Aires, Movistar Arena…" formControlName="city" />
+  </div>
+
+  <div class="field">
+    <label for="date">Fecha</label>
+    <input id="date" type="date" formControlName="date" />
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="form.invalid || loading">Buscar</button>
+    <button type="button" class="ghost" (click)="clear()">Limpiar</button>
+  </div>
+</form>
+
+<div class="results" *ngIf="submitted">
+  <div *ngIf="loading" class="loading">Buscando eventos…</div>
+  <ng-container *ngIf="!loading">
+    <h3 *ngIf="results.length">Resultados ({{ results.length }})</h3>
+    <p *ngIf="!results.length">No encontramos eventos con esos filtros.</p>
+
+    <div class="cards" *ngIf="results.length">
+      <article class="card" *ngFor="let e of results; trackBy: trackById">
+        <div class="banner" *ngIf="e.banner" [style.backgroundImage]="'url(' + e.banner + ')'"></div>
+        <div class="body">
+          <h4 class="name">{{ e.name }}</h4>
+          <p class="meta">
+            <span>{{ e.city }}</span> • <span>{{ e.venue }}</span> •
+            <span>{{ e.date | date:'longDate' }}</span>
+          </p>
+          <button class="primary">Ver estacionamientos</button>
+        </div>
+      </article>
+    </div>
+  </ng-container>
+</div>

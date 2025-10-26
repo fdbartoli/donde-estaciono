@@ -1,0 +1,66 @@
+[
+  {
+    "id": "e1",
+    "name": "Coldplay - Music of the Spheres",
+    "city": "Buenos Aires",
+    "venue": "Estadio River Plate",
+    "date": "2025-11-21",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e2",
+    "name": "Feria del Libro",
+    "city": "Buenos Aires",
+    "venue": "La Rural",
+    "date": "2025-04-25",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e3",
+    "name": "Soda Stereo - Gracias Totales",
+    "city": "Córdoba",
+    "venue": "Estadio Mario Alberto Kempes",
+    "date": "2025-09-13",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e4",
+    "name": "Lollapalooza",
+    "city": "Buenos Aires",
+    "venue": "Hipódromo de San Isidro",
+    "date": "2025-03-28",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e5",
+    "name": "Tini - Tour 2025",
+    "city": "Rosario",
+    "venue": "Metropolitano",
+    "date": "2025-07-05",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e6",
+    "name": "La Renga",
+    "city": "Mendoza",
+    "venue": "Parque San Martín",
+    "date": "2025-08-09",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e7",
+    "name": "No Te Va Gustar",
+    "city": "Montevideo",
+    "venue": "Antel Arena",
+    "date": "2025-06-21",
+    "banner": "assets/hero-events.jpg"
+  },
+  {
+    "id": "e8",
+    "name": "Fito Páez - El amor después del amor",
+    "city": "Buenos Aires",
+    "venue": "Movistar Arena",
+    "date": "2025-10-10",
+    "banner": "assets/hero-events.jpg"
+  }
+]

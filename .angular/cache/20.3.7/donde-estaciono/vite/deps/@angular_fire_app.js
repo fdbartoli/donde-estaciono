@@ -28,8 +28,8 @@ import {
   setLogLevel
 } from "./chunk-VOUEYQ57.js";
 import "./chunk-YPTF6MNN.js";
-import "./chunk-IONO6HLE.js";
 import "./chunk-OSECCFIU.js";
+import "./chunk-IONO6HLE.js";
 import "./chunk-PHHPLELC.js";
 export {
   FirebaseApp,
