@@ -1,0 +1,26 @@
+<section class="select-parking">
+  <header class="header">
+    <h1>Elegí tu estacionamiento</h1>
+  </header>
+
+  <div class="map-card">
+    <img [src]="mapSrc" alt="Mapa con estacionamientos cercanos" />
+  </div>
+
+  <div class="actions">
+    <button class="btn-primary" (click)="reservar()">Reservar</button>
+  </div>
+</section>
+
+<div class="modal-root" *ngIf="showLogin" (click)="closeLogin()">
+  <div
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="loginTitle"
+    (click)="$event.stopPropagation()"
+  >
+    <button class="close" type="button" aria-label="Cerrar" (click)="closeLogin()">×</button>
+    <app-login></app-login>
+  </div>
+</div>

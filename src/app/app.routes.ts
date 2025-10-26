@@ -10,5 +10,13 @@ export const routes: Routes = [
       import('./pages/event-search/event-search.component').then(m => m.EventSearchComponent),
   },
 
+    {
+    path: 'select-parking',
+    loadComponent: () =>
+      import('./pages/select-parking/select-parking').then(
+        (m) => m.SelectParkingComponent
+      ),
+  },
+
   { path: '**', redirectTo: '' },
 ];

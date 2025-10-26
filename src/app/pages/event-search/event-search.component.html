@@ -45,7 +45,9 @@
             <span>{{ e.city }}</span> • <span>{{ e.venue }}</span> •
             <span>{{ e.date | date:'longDate' }}</span>
           </p>
-          <button class="primary">Ver estacionamientos</button>
+          <button class="primary" type="button" (click)="goToParking(e)">
+            Ver estacionamientos
+          </button>
         </div>
       </article>
     </div>

@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 type EventResult = {
   id: string | number;
@@ -20,6 +22,7 @@ type EventResult = {
 })
 export class EventSearchComponent {
   private fb = inject(FormBuilder);
+   private router = inject(Router);
 
   private readonly MOCK_EVENTS: EventResult[] = [
     {
@@ -132,4 +135,10 @@ export class EventSearchComponent {
   trackById(_: number, e: EventResult) {
     return e.id;
   }
+  
+  
+  goToParking(e: any) {
+    this.router.navigate(['/select-parking'], { state: { event: e } });
+  }
+
 }
