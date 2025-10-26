@@ -64,6 +64,24 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "ghpages": {
+              "baseHref": "/donde-estaciono/",
+              "outputMode": "static",
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                },
+                {
+                  "glob": "**/*",
+                  "input": "src/assets",
+                  "output": "assets"
+                }
+              ],
+              "styles": [
+                "src/styles.scss"
+              ]
             }
           },
           "defaultConfiguration": "production"
