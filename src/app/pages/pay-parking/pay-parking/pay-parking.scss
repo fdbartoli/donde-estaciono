@@ -14,7 +14,10 @@
     radial-gradient(1000px 500px at 80% -10%, rgba(14,165,233,.18), transparent 60%),
     radial-gradient(800px 400px at -10% 10%, rgba(14,165,233,.14), transparent 55%),
     var(--bg);
-  min-height: 100dvh;
+
+  min-height: auto;
+  overflow: visible;
+
   padding: 24px 16px 56px;
 }
 
