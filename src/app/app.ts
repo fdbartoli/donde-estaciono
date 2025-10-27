@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -12,4 +13,23 @@ import { HeaderComponent } from './header/header';
     <router-outlet />
   `,
 })
-export class App {}
+export class App {
+    private router = inject(Router);
+
+  constructor() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => {
+        const html = document.documentElement;
+        const body = document.body;
+
+        body.classList.remove('cdk-global-scrollblock', 'modal-open', 'no-scroll');
+        html.classList.remove('cdk-global-scrollblock');
+
+        body.style.overflow = '';
+        html.style.overflow = '';
+        body.style.position = '';
+        body.style.width = '';
+      });
+  }
+}

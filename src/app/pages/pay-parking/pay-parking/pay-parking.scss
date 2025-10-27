@@ -14,12 +14,10 @@
     radial-gradient(1000px 500px at 80% -10%, rgba(14,165,233,.18), transparent 60%),
     radial-gradient(800px 400px at -10% 10%, rgba(14,165,233,.14), transparent 55%),
     var(--bg);
-
-  min-height: auto;
-  overflow: visible;
-
+  min-height: 100dvh;
   padding: 24px 16px 56px;
 }
+
 
 .pay-wrap {
   margin: 0 auto;
@@ -34,6 +32,7 @@
   box-shadow: var(--shadow);
   padding: 18px;
 }
+
 
 .title {
   font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.8rem);
