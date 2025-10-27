@@ -1,1 +1,68 @@
-<p>pay-parking works!</p>
+<section class="pay-page">
+  <div class="pay-card">
+    <header class="header">
+      <h1 class="title">Pago de reserva</h1>
+      <p class="subtitle">Revisá el monto y completá los datos de tu tarjeta.</p>
+    </header>
+
+    <div class="summary">
+      <div class="row">
+        <span>Precio por hora</span>
+        <strong>${{ pricePerHour | number:'1.0-0' }}</strong>
+      </div>
+
+      <div class="row hours-row">
+        <span>Horas</span>
+        <div class="stepper">
+          <button type="button" class="step" (click)="decHours()">−</button>
+          <input
+            type="number"
+            [value]="hours"
+            (input)="onHoursInput($event)"
+            [min]="minHours"
+            [max]="maxHours"
+          />
+          <button type="button" class="step" (click)="incHours()">+</button>
+        </div>
+      </div>
+
+      <div class="row total">
+        <span>Total a pagar</span>
+        <strong>${{ total | number:'1.0-0' }}</strong>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="pay()" novalidate class="form-grid">
+      <div class="field full">
+        <label>Nombre en la tarjeta</label>
+        <input type="text" formControlName="name" placeholder="Como figura en la tarjeta" />
+        <small class="error" *ngIf="f.name.touched && f.name.invalid">Campo obligatorio.</small>
+      </div>
+
+      <div class="field full">
+        <label>Número de tarjeta</label>
+        <input type="text" inputmode="numeric" maxlength="16" formControlName="number" placeholder="16 dígitos" />
+        <small class="error" *ngIf="f.number.touched && f.number.invalid">
+          Ingresá 16 dígitos sin espacios.
+        </small>
+      </div>
+
+      <div class="field">
+        <label>Vencimiento (MM/YY)</label>
+        <input type="text" formControlName="expiry" placeholder="MM/YY" maxlength="5" />
+        <small class="error" *ngIf="f.expiry.touched && f.expiry.invalid">Formato MM/YY.</small>
+      </div>
+
+      <div class="field">
+        <label>CVC</label>
+        <input type="text" inputmode="numeric" maxlength="4" formControlName="cvc" placeholder="3 o 4 dígitos" />
+        <small class="error" *ngIf="f.cvc.touched && f.cvc.invalid">Ingresá 3 o 4 dígitos.</small>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="primary" [disabled]="form.invalid">Aceptar pago</button>
+        <button type="button" class="ghost" (click)="cancel()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</section>
