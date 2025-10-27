@@ -31,7 +31,7 @@ export class EventSearchComponent {
       city: 'Buenos Aires',
       venue: 'River Plate',
       date: '2025-11-21',
-      banner: 'https://images.unsplash.com/photo-1518972559570-7cc1309f3229?q=80&w=1200&auto=format&fit=crop'
+      banner: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1200&auto=format&fit=crop'
     },
     {
       id: 2,
@@ -39,7 +39,7 @@ export class EventSearchComponent {
       city: 'Buenos Aires',
       venue: 'La Rural',
       date: '2025-05-10',
-      banner: 'https://images.unsplash.com/photo-1513477967668-2aaf11838bd0?q=80&w=1200&auto=format&fit=crop'
+      banner: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=1200&auto=format&fit=crop'
     },
     {
       id: 3,
