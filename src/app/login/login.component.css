@@ -1,11 +1,17 @@
 :host { display: block; }
 
 .auth-bg{
-  min-height: 100vh;
+  min-height: auto;
+  max-height: 80vh;
+  overflow: auto;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: #33d3f7;
+  padding: 24px 18px;
+  border-radius: 18px;
 }
 
 .auth-card{
@@ -119,8 +125,6 @@ input:focus{
   margin-top: 14px;
 }
 .footer .link{ margin-left: 6px; }
-
-/* TODO CHECK THIS */
 
 html, body { height: 100%; }
 body {

@@ -21,19 +21,20 @@ export class LoginComponent {
 
   async google() {
     await this.auth.signInWithGoogle();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/pay-parking');
   }
+
   async emailLogin() {
     await this.auth.signInWithEmail(this.email, this.password);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/pay-parking');
   }
+
   async emailSignup() {
     await this.auth.signUpWithEmail(this.email, this.password);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/pay-parking');
   }
 
   forgotPassword(e: Event) {
     e.preventDefault();
-    // TODO: implementar flujo de 
   }
 }

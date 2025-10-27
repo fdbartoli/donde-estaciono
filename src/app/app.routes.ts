@@ -18,5 +18,11 @@ export const routes: Routes = [
       ),
   },
 
+{ 
+  path: 'pay-parking',
+  loadComponent: () =>
+    import('./pages/pay-parking/pay-parking/pay-parking').then(m => m.PayParkingComponent),
+},
+
   { path: '**', redirectTo: '' },
 ];

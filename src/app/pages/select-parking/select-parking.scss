@@ -1,3 +1,8 @@
+:host {
+  --brand: #0ea5e9;
+  --brand-600: #0284c7;
+}
+
 .select-parking {
   max-width: 960px;
   margin: 0 auto;
@@ -37,47 +42,42 @@
 }
 
 .actions {
-  margin-top: 1.25rem;
   display: flex;
   justify-content: center;
+  margin: 16px auto 0; 
+  width: 100%; 
 }
 
 .btn-primary {
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  background: var(--brand);
   color: #fff;
+  box-shadow: 0 8px 18px rgba(14,165,233,.26);
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .2s ease, background .2s, color .2s, opacity .2s;
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
-
-  padding: .9rem 1.2rem;
-  border: 0;
-  border-radius: 12px;
-  cursor: pointer;
-
-  background: linear-gradient(90deg, #0ea5e9 0%, #7c3aed 100%);
-  box-shadow: 0 6px 20px rgba(14,165,233,.35);
-
-  font-weight: 600;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: transform .15s ease, box-shadow .15s ease;
 }
-
-.btn-primary:hover { transform: translateY(-1px); }
-.btn-primary:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(14,165,233,.25); }
-.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+.btn-primary:hover   { background: var(--brand-600); }
+.btn-primary:active  { transform: translateY(1px); }
+.btn-primary:disabled{ opacity: .6; cursor: not-allowed; }
 
 /* Modal */
-.modal-root {
+.modal-root{
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-
-  background: rgba(2, 6, 23, 0.6);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;  
+  justify-content: center; 
+  padding: 24px;
+  z-index: 1000;
 }
 
 .modal {
@@ -85,24 +85,24 @@
   width: 100%;
   max-width: 480px;
 
-  background: #0b1220;
+  background: transparent;
   border: 1px solid rgba(148, 163, 184, .15);
   border-radius: 16px;
   box-shadow: 0 30px 60px rgba(2, 6, 23, .55);
-  padding: 1rem;
+  padding: 0;
 
 }
 
-.close {
+.close{
   position: absolute;
-  top: .5rem;
-  right: .75rem;
-  border: 0;
+  top: 10px;
+  right: 12px;
   background: transparent;
-  color: #94a3b8;
-  font-size: 1.5rem;
-  line-height: 1;
+  border: 0;
+  color: #cbd5e1;
+  font-size: 20px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .close:hover {
