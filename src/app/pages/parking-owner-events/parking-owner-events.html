@@ -1,0 +1,163 @@
+<div class="owner-events">
+
+  <header class="header">
+    <h2>Eventos y Lugares</h2>
+    <button class="primary" (click)="openCreate()">+ Nuevo evento</button>
+  </header>
+
+  <section class="filters">
+    <input type="text" placeholder="Buscar por evento o lugar..." [(ngModel)]="q"
+           (ngModelChange)="q = $event" />
+
+    <select [(ngModel)]="status" (ngModelChange)="status = $event">
+      <option value="all">Todos</option>
+      <option value="draft">Borrador</option>
+      <option value="published">Publicado</option>
+      <option value="finished">Finalizado</option>
+    </select>
+
+    <div class="range">
+      <label>Desde</label>
+      <input type="date" [(ngModel)]="from" />
+      <label>Hasta</label>
+      <input type="date" [(ngModel)]="to" />
+    </div>
+  </section>
+
+  <section class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Evento</th>
+          <th>Fecha</th>
+          <th>Horario</th>
+          <th>Lugar</th>
+          <th>Cupo</th>
+          <th>Precio</th>
+          <th>Estado</th>
+          <th class="right">Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let ev of filtered(); trackBy: trackById">
+          <td class="col-main">
+            <div class="title">{{ ev.name }}</div>
+            <div class="sub">{{ ev.notes }}</div>
+          </td>
+
+          <td>{{ ev.date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ ev.startTime }}–{{ ev.endTime }}</td>
+          <td>{{ ev.venue }}</td>
+
+          <td>
+            <div class="quota">
+              <div class="bar"><span [style.width.%]="occupancyPct(ev)"></span></div>
+              <div class="nums">{{ ev.totalSpots - ev.availableSpots }}/{{ ev.totalSpots }}</div>
+            </div>
+            <div class="quota-actions">
+              <button class="chip" (click)="adjustAvailable(ev, -1)">–</button>
+              <span>{{ ev.availableSpots }} disp.</span>
+              <button class="chip" (click)="adjustAvailable(ev, +1)">+</button>
+            </div>
+          </td>
+
+          <td>ARS {{ ev.price | number:'1.0-0' }}</td>
+
+          <td>
+            <span class="badge" [class.draft]="ev.status==='draft'"
+                               [class.published]="ev.status==='published'"
+                               [class.finished]="ev.status==='finished'">
+              {{ badge(ev) }}
+            </span>
+          </td>
+
+          <td class="right">
+            <div class="row-actions">
+              <button class="ghost" (click)="togglePublish(ev)">
+                {{ ev.status==='published' ? 'Quitar publicación' : 'Publicar' }}
+              </button>
+              <button class="ghost" (click)="openEdit(ev)">Editar</button>
+              <button class="danger" (click)="remove(ev)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="filtered().length === 0">
+          <td colspan="8" class="empty">No hay resultados con los filtros seleccionados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="side-panel" [class.open]="panelOpen()">
+    <div class="panel-header">
+      <h3>{{ isEditing() ? 'Quitar publicación' : 'Nuevo evento' }}</h3>
+      <button class="close" (click)="cancelPanel()">×</button>
+    </div>
+
+    <form class="form" *ngIf="selected() as f" (submit)="$event.preventDefault(); save()">
+      <label>
+        <span>Evento</span>
+        <input type="text" [(ngModel)]="f.name" name="name" required />
+      </label>
+
+      <label>
+        <span>Lugar</span>
+        <input type="text" [(ngModel)]="f.venue" name="venue" required />
+      </label>
+
+      <div class="grid-2">
+        <label>
+          <span>Fecha</span>
+          <input type="date" [(ngModel)]="f.date" name="date" />
+        </label>
+        <label>
+          <span>Estado</span>
+          <select [(ngModel)]="f.status" name="status">
+            <option value="draft">Borrador</option>
+            <option value="published">Publicado</option>
+            <option value="finished">Finalizado</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="grid-2">
+        <label>
+          <span>Desde</span>
+          <input type="time" [(ngModel)]="f.startTime" name="start" />
+        </label>
+        <label>
+          <span>Hasta</span>
+          <input type="time" [(ngModel)]="f.endTime" name="end" />
+        </label>
+      </div>
+
+      <div class="grid-3">
+        <label>
+          <span>Total</span>
+          <input type="number" min="0" [(ngModel)]="f.totalSpots" name="total" />
+        </label>
+        <label>
+          <span>Disponibles</span>
+          <input type="number" min="0" [(ngModel)]="f.availableSpots" name="avail" />
+        </label>
+        <label>
+          <span>Precio (ARS)</span>
+          <input type="number" min="0" [(ngModel)]="f.price" name="price" />
+        </label>
+      </div>
+
+      <label>
+        <span>Notas</span>
+        <textarea rows="3" [(ngModel)]="f.notes" name="notes" placeholder="Detalles visibles para los usuarios"></textarea>
+      </label>
+
+      <div class="actions">
+        <button type="button" class="ghost" (click)="cancelPanel()">Cancelar</button>
+        <button type="submit" class="primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+</div>

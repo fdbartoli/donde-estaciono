@@ -14,4 +14,9 @@ export class HomeComponent {
   goToSearch(): void {
     this.router.navigateByUrl('/buscar-estacionamiento');
   }
+
+  goToAdmin(): void {
+    this.router.navigateByUrl('/owner/events');
+  }
+
 }
