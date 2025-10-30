@@ -2,15 +2,17 @@ import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header';
 import { filter } from 'rxjs';
+import { ChatbotWidgetComponent } from "./chatbot-widget/chatbot-widget";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, ChatbotWidgetComponent],
   template: `
     <app-header />
     <router-outlet />
+    <app-chatbot-widget />
   `,
 })
 export class App {

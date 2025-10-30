@@ -1,0 +1,48 @@
+<button class="chatbot-fab" (click)="toggle()" aria-label="Abrir chat de ayuda">
+  <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+    <path d="M20 2H4a2 2 0 0 0-2 2v14l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/>
+  </svg>
+  <span class="badge" *ngIf="unread() > 0">{{ unread() }}</span>
+</button>
+
+<div class="chatbot-panel" [class.open]="open()">
+  <header class="panel-header" role="heading" aria-level="1">
+    <div class="title">
+      <span class="dot"></span>
+      Asistente — Dónde estaciono
+    </div>
+    <div class="actions">
+      <button class="ghost" (click)="reset()" title="Reiniciar chat" aria-label="Reiniciar chat">↺</button>
+      <button class="close" (click)="toggle()" aria-label="Cerrar chat">×</button>
+    </div>
+  </header>
+
+  <section class="messages" role="log" aria-live="polite">
+    <ng-container *ngFor="let m of messages(); trackBy: trackById">
+      <div class="bubble" [class.me]="m.from==='user'">
+        <p>{{ m.text }}</p>
+        <time>{{ m.at | date:'shortTime' }}</time>
+      </div>
+    </ng-container>
+
+    <div class="typing" *ngIf="typing()">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </section>
+
+  <div class="quick-replies">
+    <button *ngFor="let q of quickReplies()" class="chip" (click)="clickQuickReply(q)">{{ q }}</button>
+  </div>
+
+  <form class="composer" (submit)="$event.preventDefault(); send()">
+    <input
+      type="text"
+      [disabled]="sending()"
+      [(ngModel)]="input"
+      name="chatInput"
+      placeholder="Escribí tu mensaje… (ej.: 'Belgrano')"
+      autocomplete="off"
+    />
+    <button type="submit" [disabled]="sending() || !input().trim()">Enviar</button>
+  </form>
+</div>
