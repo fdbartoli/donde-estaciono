@@ -6,6 +6,15 @@ type Msg = { id: number; from: 'bot'|'user'|'typing'; text: string; at: number }
 
 const LS_KEY = 'chatbot_widget_state_v1';
 
+const MENU_PROMPT = `¡Hola! Soy el asistente de ¿Dónde estaciono?
+¿Tu consulta es sobre:
+A) Buscar estacionamiento
+B) Ver/editar mi reserva
+C) Cancelar una reserva
+D) Acceso e ingreso (dirección/QR)
+E) Soy propietario
+Elegí una opción.`;
+
 @Component({
   selector: 'app-chatbot-widget',
   standalone: true,
@@ -20,15 +29,16 @@ export class ChatbotWidgetComponent {
   input = signal('');
   unread = signal(0);
   quickReplies = signal<string[]>([
-    'Buscar cocheras cerca',
-    'Precios y horarios',
-    'Próximos eventos',
-    '¿Cómo funciona?'
+    'A) Buscar estacionamiento',
+    'B) Ver/editar mi reserva',
+    'C) Cancelar reserva',
+    'D) Acceso/QR',
+    'E) Soy propietario'
   ]);
 
   private seq = 0;
   messages = signal<Msg[]>([
-    { id: ++this.seq, from: 'bot', text: '¡Hola! Soy el asistente de Dónde estaciono 🚗. ¿En qué te ayudo?', at: Date.now() }
+    { id: ++this.seq, from: 'bot', text: MENU_PROMPT, at: Date.now() }
   ]);
 
   constructor() {
@@ -39,9 +49,11 @@ export class ChatbotWidgetComponent {
         this.open.set(!!s.open);
         this.unread.set(s.unread ?? 0);
         this.seq = s.seq ?? this.seq;
-        this.messages.set((s.messages ?? []).map((m: Msg) => ({...m, at: m.at ?? Date.now()})));
+        this.messages.set((s.messages ?? []).map((m: Msg) => ({ ...m, at: m.at ?? Date.now() })));
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* TODO CREATE CATCH*/
+    }
 
     effect(() => {
       localStorage.setItem(LS_KEY, JSON.stringify({
@@ -65,7 +77,7 @@ export class ChatbotWidgetComponent {
   reset() {
     this.seq = 0;
     this.messages.set([
-      { id: ++this.seq, from: 'bot', text: '¡Hola! ¿Qué necesitas?', at: Date.now() }
+      { id: ++this.seq, from: 'bot', text: MENU_PROMPT, at: Date.now() }
     ]);
     this.input.set('');
     this.unread.set(0);
@@ -109,6 +121,10 @@ export class ChatbotWidgetComponent {
   private mockReply(userText: string): string {
     const t = userText.toLowerCase();
 
+    if (t.includes('hola') || t.includes('buen') || t.includes('cómo funciona') || t.includes('como funciona') || t.includes('ayuda')) {
+      return MENU_PROMPT;
+    }
+
     const barrios = ['belgrano', 'palermo', 'caballito', 'recoleta', 'flores'];
     const barrio = barrios.find(b => t.includes(b));
     if (barrio || t.includes('cochera') || t.includes('estacionar') || t.includes('cerca')) {
@@ -121,18 +137,10 @@ export class ChatbotWidgetComponent {
     }
 
     if (t.includes('multa') || t.includes('eventos') || t.includes('amarilla') || t.includes('grua')) {
-      return 'Coldplay se presenta el 15 de noviembre en el Estadio River Plate !Asegurate tu estacionamiento!.';
+      return 'Coldplay se presenta el 15 de noviembre en el Estadio River Plate ¡Asegurate tu estacionamiento!.';
     }
 
-    if (t.includes('cómo funciona') || t.includes('como funciona') || t.includes('ayuda')) {
-      return 'Buscamos cocheras y espacios en la vía pública según tu evento, mostramos tarifas y horarios y te guiamos hasta el lugar.';
-    }
-
-    if (t.includes('hola') || t.includes('buen')) {
-      return '¡Hola! ¿Buscás un lugar libre o querés ver tarifas y horarios? Podés decirme un barrio: Belgrano, Palermo, Caballito…';
-    }
-
-    return 'Puedo ayudarte a encontrar cocheras. Decime el barrio o evento(ej.: “Belgrano”) o una intersección.';
+    return `Para ayudarte rápido, elegí una opción.\n\n${MENU_PROMPT}`;
   }
 
   private fakeParkingResults(barrio: string): string {
@@ -147,8 +155,5 @@ export class ChatbotWidgetComponent {
 
   trackById(index: number, item: any): any {
     return item.id || index;
+  }
 }
-
-}
-
-
